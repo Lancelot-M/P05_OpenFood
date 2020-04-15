@@ -1,0 +1,15 @@
+Document de démarche choisie.
+
+Difficultées rencontrées et solutions:
+
+	-
+	-
+	-
+
+Choi de l'algorithme:
+	??
+
+Méthodologie du projet:
+
+	- ?
+	- User Story ?
