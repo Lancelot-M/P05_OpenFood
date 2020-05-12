@@ -2,6 +2,7 @@
 
 import json
 import requests
+from constantes import CATEGORIES
 
 def check_cat():
 
@@ -30,34 +31,41 @@ def check_prod(list_cat):
     fit = ["id", "ingregients_text_fr", "stores", "countries", "product_name", "generic_name","brands", "origins", "product_name_fr", "nutrition_grades", "nutrition_grade_fr", "categories", "categories_hierarchy", ]
 
     b_url = "https://fr-en.openfoodfacts.org/category/{}.json"
-    for el in list_cat[400:420]:
+    for_file = []
+    for el in list_cat[400:405]:
         for k, v in el.items():
             if k == 'name':
                 url = b_url.format(v)
                 reponse = requests.get(url)
                 data = reponse.json()
-                print(k, v)
+                for_file.append(data)
+                '''print(k, v)
                 for k1, v1 in data.items():
                     if k1 == 'products':
                         for el in v1:
                             for key, value in el.items():
-                                if key == "product_name":
+                                if key in fit:
                                     print(key, ">>>>", value)
-                        print("-----------------")
-                        print("\n\n")
+                            print("-----------------")
+                            print("\n\n")'''
 
+        with open('file_OFF.json', 'w') as f:
+            json.dump(for_file, f)
 
 
 """ ----------------------------- """
 
 
 list_cat = check_cat()
-check_prod(list_cat)
+#check_prod(list_cat)
 
-'''for el in list_cat:
+list2 = ["id", "url", "name", "products"]
+for el in list_cat:
     for k, v in el.items():
-        if k == 'name':
-            print(k, v)'''
+        if k == "name" and v in CATEGORIES:
+            for k2, v2 in el.items():
+                if k2 in list2:
+                    print(k2, v2)
 
 
 

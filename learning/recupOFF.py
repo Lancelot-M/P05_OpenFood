@@ -23,32 +23,18 @@ def execute_query(connection, query):
     try:
         cursor.execute(query)
         connection.commit()
-        print("Query executed successfully")
+        print("Query executed successfully POUET")
     except Error as e:
         print("The error", e, "occurred")
 
-
-delete_comment = "DELETE FROM categorie"
-
-create_categorie_table = """
-CREATE TABLE IF NOT EXISTS categorie (
-    id INT,
-    name VARCHAR(40) NOT NULL,
-    description TEXT,
-    PRIMARY KEY (name)
-) ENGINE=InnoDB
-"""
-
-
-create_cat = """
-INSERT INTO
-    categorie (id, name, description)
-VALUES
-    (13948, 'cereales', 'produits issus des grosses moissnoneuz'),
-    (3, 'laitages', NULL),
-    (4930, 'plomb', 'peinture indigeste');
-"""
-
+def execute_fillquery(connection, query, value):
+    cursor = connection.cursor()
+    try:
+        cursor.executemany(query, value)
+        connection.commit()
+        print("Query executed successfully BANANA")
+    except Error as e:
+        print("The error", e, "occured")
 
 def execute_read_query(connection, query):
     cursor = connection.cursor()
@@ -60,13 +46,37 @@ def execute_read_query(connection, query):
     except Error as e:
         print("The error", e, "occurred")
 
-select_cat = "SELECT * FROM categorie"
+delete_comment = "DROP TABLE IF EXISTS categorie;"
+
+create_categorie_table = """
+CREATE TABLE IF NOT EXISTS categorie (
+    id SMALLINT AUTO_INCREMENT,
+    name VARCHAR(40) NOT NULL,
+    url TEXT,
+    products INT,
+    PRIMARY KEY (id)
+) ENGINE=InnoDB;
+"""
+
+insert_categorie = """
+INSERT INTO categorie (
+    name, url, products)
+VALUES
+    (%s, %s, %s);
+"""
+
+select_cat = "SELECT * FROM categorie;"
+
+categorie1 = [("Bolognese lasagne", "url-bidon.com", 69),
+                ("Tarte", "uuuu", 0)]
 
 
 connection = create_connection("localhost", "lancelot", "mdp", "OpenFoodFact")
 execute_query(connection, delete_comment)
 execute_query(connection, create_categorie_table)
-execute_query(connection, create_cat)
+execute_fillquery(connection, insert_categorie, categorie1)
 categorie = execute_read_query(connection, select_cat)
-for cat in categorie:
-    print(cat)
+
+for el in categorie:
+    print("---")
+    print(el)
