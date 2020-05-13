@@ -18,4 +18,5 @@ Méthodologie du projet:
 	- Decouverte BDD
 	- Recherche bibli python (API/SQL)
 	- Recherche par itération depuis list/dico
+	- Recherche de structuration en objet depuis un code procedural.
 

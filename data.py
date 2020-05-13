@@ -3,6 +3,8 @@
 '''File contain data's class.'''
 
 from constantes import CATEGORIES
+from data_requests import CategoriesRequests
+from db_connection import *
 import requests
 import json
 
@@ -22,7 +24,7 @@ class Categories:
         self.products = products
 
     def get_categories():
-        """Function get data frop API."""
+        """Get data from API."""
         data_table = {}
         data_id = 0
         url = "https://fr-en.openfoodfacts.org/categories.json"
@@ -65,3 +67,6 @@ class Saves:
 if __name__ == "__main__":
     
     data = Categories.get_categories()
+    CategoriesRequests.del_table(db)
+    CategoriesRequestes.create_table(db)
+
