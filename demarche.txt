@@ -4,7 +4,7 @@ Difficultées rencontrées et solutions:
 
 	- Recup JSON
 	- filtrer les infos
-	- 
+	- s'appercevoir à la fin qu'on à pas vu que Categories(name) != Aliments(categorie)........
 	-
 
 Choi de l'algorithme:
