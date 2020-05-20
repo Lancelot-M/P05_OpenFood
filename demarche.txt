@@ -5,7 +5,9 @@ Difficultées rencontrées et solutions:
 	- Recup JSON
 	- filtrer les infos
 	- s'appercevoir à la fin qu'on à pas vu que Categories(name) != Aliments(categorie)........
-	-
+	- trouver qu'il falai un index sur un colone reference pour faire une clé etrangère
+	- trouver comment afficher une liste page par page
+	- fn all(), début des listes d'intention, essai de supprimer plusieur element dans une liste puis creation d'une nouvelle en bouclant la 1er pour exclure les valeur souhaité
 
 Choi de l'algorithme:
 	??

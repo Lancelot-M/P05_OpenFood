@@ -10,10 +10,11 @@ class CategoriesRequests:
         query = """
         CREATE TABLE IF NOT EXISTS categories (
             id SMALLINT AUTO_INCREMENT,
-            name VARCHAR(40) NOT NULL,
+            name VARCHAR(50) NOT NULL,
             url TEXT,
             products INT,
-            PRIMARY KEY (id)
+            PRIMARY KEY (id),
+            INDEX index_name (name)
         ) ENGINE=InnoDB;
         """
         Base_fn.execute_query(db, query)
@@ -23,12 +24,12 @@ class CategoriesRequests:
 
         query = """
         INSERT INTO categories (
-            id, name, url, products)
+            name, url, products)
         VALUES
-            (%s, %s, %s, %s);
+            (%s, %s, %s);
         """
         for value in data_dict.values():
-            data = (value.id_bdd, value.name, value.url, value.products)
+            data = (value.name, value.url, value.products)
             Base_fn.execute_query(db, query, data)
 
     def get_data(db, data):
@@ -58,9 +59,12 @@ class AlimentsRequests:
         CREATE TABLE IF NOT EXISTS aliments (
             product_name VARCHAR(200),
             id_off BIGINT,
+            url VARCHAR(200),
             store VARCHAR(40),
             nutrition_grade VARCHAR(5),
-            categorie TEXT
+            categorie VARCHAR(50) NOT NULL,
+            PRIMARY KEY (product_name),
+            CONSTRAINT fk_categorie FOREIGN KEY (categorie) REFERENCES categories(name)
             ) ENGINE=InnoDB;
             """
         Base_fn.execute_query(db, query)
@@ -70,13 +74,13 @@ class AlimentsRequests:
 
         query = """
         INSERT INTO aliments (
-            store, product_name, categorie, nutrition_grade, id_off)
+            store, product_name, categorie, nutrition_grade, id_off, url)
         VALUES (
-            %s, %s, %s, %s, %s);
+            %s, %s, %s, %s, %s, %s);
         """
         for element in data_list:
-            data_aliment = (element.stores, element.product_name, element.categorie, element.nutrition_grades,
-                                element.id_off)
+            data_aliment = (element.stores, element.product_name, element.categorie, 
+                                element.nutrition_grades, element.id_off, element.url)
             Base_fn.execute_query(db, query, data_aliment)
 
     def get_data(db, data):
@@ -107,7 +111,7 @@ class AlimentsRequests:
 
         b_query = """
         SELECT 
-            product_name
+            product_name, store, url
         FROM
             aliments
         WHERE
@@ -118,10 +122,10 @@ class AlimentsRequests:
         query = b_query.format(category)
         result = Base_fn.select_query(db, query)
         result = result[0 : MAX_PROD]
-        result_filter = []
+        '''result_filter = []
         for element in result:
-            result_filter.append(element[0])
-        return result_filter
+            result_filter.append(element[0])'''
+        return result
 
     def del_table(db):
         """Delete table."""

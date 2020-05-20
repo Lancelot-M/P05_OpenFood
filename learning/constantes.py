@@ -4,4 +4,4 @@
 CATEGORIES = ["Chocolates", "Condiments", "Chickens", "Hams", "Bolognese lasagne", "Potatoes", "Energy drinks", "Berries", "Snacks and desserts for babies", "Aromatic herbs"]
 
 #Maximum substitutions items.
-MAX_PROD = 1
+MAX_PROD = 3
