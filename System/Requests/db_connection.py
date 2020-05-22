@@ -26,7 +26,7 @@ class Base_fn:
         try:
             cursor.execute(query, value)
             connection.commit()
-            #print("Query executed successfully.")
+            print("Query executed successfully.")
         except Error as e:
             print("The error", e, "occured")
 
