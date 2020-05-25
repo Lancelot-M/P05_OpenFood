@@ -1,12 +1,14 @@
+"""File containing database instruction."""
+
 import mysql.connector
 from mysql.connector import Error
 
+
 class Base_fn:
     """Mysql heart function."""
-    
+
     def create_connection(host_name, user_name, user_password, db_name):
         """Connection to database."""
-
         connection = None
         try:
             connection = mysql.connector.connect(
@@ -21,7 +23,6 @@ class Base_fn:
 
     def execute_query(connection, query, value=None):
         """For Drop, Create, Insert query."""
-    
         cursor = connection.cursor()
         try:
             cursor.execute(query, value)
@@ -32,13 +33,12 @@ class Base_fn:
 
     def select_query(connection, query):
         """For Select query."""
-
         cursor = connection.cursor()
         result = None
         try:
             cursor.execute(query)
             result = cursor.fetchall()
-            #print("Select query executed successfully.")
+            print("Select query executed successfully.")
             return result
         except Error as e:
             print("The error", e, "occured")

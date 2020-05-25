@@ -1,11 +1,11 @@
 from System.Requests.db_connection import Base_fn
 
+
 class CategoriesRequests:
     """Interface with database."""
 
     def create_table(db):
         """Create the categories table."""
-
         query = """
         CREATE TABLE IF NOT EXISTS categories (
             id SMALLINT AUTO_INCREMENT,
@@ -20,7 +20,6 @@ class CategoriesRequests:
 
     def add_data(db, data_dict):
         """Insert value in table."""
-
         query = """
         INSERT INTO categories (
             name, url, products)
@@ -33,7 +32,6 @@ class CategoriesRequests:
 
     def get_data(db, data):
         """Return the column=data in categories."""
-
         b_query = """SELECT {} FROM categories;"""
         query = b_query.format(data)
         result = Base_fn.select_query(db, query)
@@ -44,6 +42,5 @@ class CategoriesRequests:
 
     def del_table(db):
         """Delete table."""
-
         query = """DROP TABLE IF EXISTS categories;"""
         Base_fn.execute_query(db, query)

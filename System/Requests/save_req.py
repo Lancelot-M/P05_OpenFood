@@ -1,9 +1,10 @@
-"""File who contain SaveRequests object."""
+"""File who contain database's instruction."""
 
 from System.Requests.db_connection import Base_fn
 
+
 class SaveRequests:
-    """Interface with Save Table."""
+    """Methode to interface with Save Table."""
 
     def create_table(db):
         """Create table save."""
@@ -24,7 +25,8 @@ class SaveRequests:
 
     def get_all(db):
         """Select all table save."""
-        query = """SELECT save.substitut_choose, save.product_choose, aliments.store, aliments.url
+        query = """SELECT save.substitut_choose,
+        save.product_choose, aliments.store, aliments.url
         FROM aliments
         INNER JOIN save
             ON aliments.product_name = save.product_choose;"""

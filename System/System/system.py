@@ -8,6 +8,7 @@ from System.Requests.categories_req import CategoriesRequests
 from System.Requests.save_req import SaveRequests
 from System.Requests.db_connection import Base_fn
 
+
 class System:
     """Core class."""
 
@@ -23,7 +24,7 @@ class System:
     def menu(self):
         """Shunt function."""
         self.print_menu()
-        choice = input(">>> Tappez le chiffre correspondant au choix voulu. <<<\n")
+        choice = input(">>> Tappez le chiffre voulu. <<<\n")
         if choice == "1":
             self.select_product()
         elif choice == "2":
@@ -37,7 +38,7 @@ class System:
 
     def print_menu(self):
         """Display home page."""
-        print("--------------- Pur Beurre Technologie. ------------------")
+        print("----------- Pur Beurre Technologie. -------------")
         print("1 >>> Quel aliment souhaitez-vous remplacer?")
         print("2 >>> Retrouver mes aliments substitués.")
         print("3 >>> Réinitialisez la base de donnees.")
@@ -66,7 +67,7 @@ class System:
         self.menu()
 
     def print_el_in_list(self, print_list):
-        """Print function."""
+        """Print param 8 by 8."""
         print("~~~~~~~~~~~~~~~~~~~~~~~~~")
         line = 0
         page = 0
@@ -75,7 +76,7 @@ class System:
             if line == 9:
                 print("9 >>> Page suivante.")
                 while int(choice) not in range(0, 10):
-                    choice = input("\n>>> Tappez le chiffre correspondant au choix voulu. <<<\n")
+                    choice = input("\n>>> Tappez le chiffre voulu. <<<\n")
                 if int(choice) in range(0, 9):
                     result = (int(choice) + (page * 8))
                     return result
@@ -86,29 +87,31 @@ class System:
                 print(line, ">>>", element)
                 line += 1
         while int(choice) not in range(0, 9):
-            choice = input("\n>>> Tappez le chiffre correspondant au choix voulu. <<<\n")
+            choice = input("\n>>> Tappez le chiffre correspondant. <<<\n")
         result = (int(choice) + (page * 8))
         return result
 
     def print_substitution(self, product, sub_list):
-        """Print sub detail."""
+        """Print choosing detail."""
         print("Substitution possibles :")
         item = self.print_el_in_list(sub_list)
         print(">>>>>>---------------------------------<<<<<<")
-        print("Vous avez choisi de remplacer", product, "par", sub_list[int(item)][0])
+        print("Vous avez choisi de remplacer", product, "par",
+              sub_list[int(item)][0])
         print(">>>>>>---------------------------------<<<<<<\n")
         data = [product, sub_list[int(item)][0]]
         SaveRequests.add_data(self.connection, data)
-        
 
     def select_product(self):
-        """Product choose."""
+        """Selection product process."""
         categories_names = CategoriesRequests.get_data(self.connection, "name")
         x = self.print_el_in_list(categories_names)
         category = categories_names[int(x)]
-        aliments_in_category = AlimentsRequests.get_aliments_by_category(self.connection, category)
+        aliments_in_category = AlimentsRequests.get_aliments_by_category(
+                self.connection, category)
         x = self.print_el_in_list(aliments_in_category)
-        substitut = AlimentsRequests.substitute_aliment(self.connection, category)
+        substitut = AlimentsRequests.substitute_aliment(self.connection,
+                                                        category)
         self.print_substitution(aliments_in_category[int(x)], substitut)
         self.menu()
 
@@ -117,5 +120,6 @@ class System:
         data = SaveRequests.get_all(self.connection)
         for element in data:
             print(">>> Produit initial:", element[1])
-            print(">>> Produit de substitution:", element[1:len(element)], "\n")
+            print(">>> Produit de substitution:",
+                  element[1:len(element)], "\n")
         self.menu()

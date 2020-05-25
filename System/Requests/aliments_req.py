@@ -3,8 +3,9 @@
 from System.Requests.db_connection import Base_fn
 from System.System.constantes import MAX_PROD
 
+
 class AlimentsRequests:
-    """Interface with Aliments Table."""
+    """Methodes to interface with Aliments Table."""
 
     def create_table(db):
         """Create table aliments."""
@@ -30,8 +31,9 @@ class AlimentsRequests:
             %s, %s, %s, %s, %s, %s);
         """
         for element in data_list:
-            data_aliment = (element.stores, element.product_name, element.categorie,
-                                element.nutrition_grades, element.id_off, element.url)
+            data_aliment = (element.stores, element.product_name,
+                            element.categorie, element.nutrition_grades,
+                            element.id_off, element.url)
             Base_fn.execute_query(db, query, data_aliment)
 
     def get_data(db, data):
