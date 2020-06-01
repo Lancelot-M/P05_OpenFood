@@ -13,7 +13,7 @@ class CategoriesRequests:
             url TEXT,
             products INT,
             PRIMARY KEY (id),
-            INDEX index_nam (name)
+            INDEX index_name (name)
         ) ENGINE=InnoDB;
         """
         Base_fn.execute_query(db, query)

@@ -43,5 +43,4 @@ class Base_fn:
             # print("Select query executed successfully.")
             return result
         except Error:
-            # print("The error", e, "occured")
             pass

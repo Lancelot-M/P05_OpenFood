@@ -17,7 +17,8 @@ class AlimentsRequests:
         store VARCHAR(40),
         nutrition_grades VARCHAR(5),
         categorie VARCHAR(50) NOT NULL,
-        PRIMARY KEY (product_name)
+        PRIMARY KEY (product_name),
+        FOREIGN KEY fk_name (categorie) REFERENCES categories (name)
         ) ENGINE=InnoDB;
         """
         Base_fn.execute_query(db, query)

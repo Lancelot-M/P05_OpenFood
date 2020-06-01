@@ -45,7 +45,7 @@ class Aliments:
     def filter_key(dict_of_categorie):
         """Check keys in dict."""
         check = ["nutrition_grades", "product_name",
-                 "categories", "url"]
+                 "categories", "url", "id"]
         clean_list = []
         for element in dict_of_categorie["products"]:
             if all(el in element.keys() for el in check):
