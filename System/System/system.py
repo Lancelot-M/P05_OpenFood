@@ -16,15 +16,16 @@ class System:
         self.connection = connection
 
     def launcher():
-        """Function to start the app."""
+        """Function to start the application."""
         connection = Base_fn.create_connection(HOST, USER, PWD, DATABASE)
-        Ratatouille = System(connection)
-        Ratatouille.menu()
+        system = System(connection)
+        system.menu()
 
     def menu(self):
         """Shunt function."""
         self.print_menu()
-        choice = input(">>> Tappez le chiffre voulu. <<<\n")
+        choice = input(">>> Tapez le chiffre correspondant "
+                       "a la ligne a selectionner. <<<\n")
         if choice == "1":
             self.select_product()
         elif choice == "2":
@@ -38,17 +39,18 @@ class System:
 
     def print_menu(self):
         """Display home page."""
-        print("----------- Pur Beurre Technologie. -------------")
-        print("1 >>> Quel aliment souhaitez-vous remplacer?")
-        print("2 >>> Retrouver mes aliments substitués.")
-        print("3 >>> Réinitialisez la base de donnees.")
-        print("4 >>> Quitter le programme.\n")
+        print("\n", "-" * 20, "Pur Beurre Application.", "-" * 20)
+        print("1 >>> Trouver un aliment de substitution")
+        print("2 >>> Retrouver mes aliments substitues.")
+        print("3 >>> Reinitialisez la base de donnees.")
+        print("4 >>> Quitter le programme.")
+        print("-" * 60)
 
     def exit_program(self):
         """Leave function."""
-        print("-------------------------------------------")
-        print("-------------- A Bientot! -----------------")
-        print("-------------------------------------------")
+        print("-" * 60)
+        print("-" * 23, " A Bientot! ", "-" * 23)
+        print("-" * 60)
         exit()
 
     def reset_database(self):
@@ -66,60 +68,84 @@ class System:
         print("Base de donnee reinitialisee.")
         self.menu()
 
-    def print_el_in_list(self, print_list):
-        """Print param 8 by 8."""
-        print("~~~~~~~~~~~~~~~~~~~~~~~~~")
+    def print_pages(self, print_list):
+        """Print list 8 elements by 8."""
         line = 0
         page = 0
-        choice = 69
+        check_list = []
+        choice = None
+        print("-" * 88)
+        for el in range(0, 10):
+            check_list.append(str(el))
         for element in print_list:
+            print(line, ">>>", element)
+            line += 1
             if line == 9:
                 print("9 >>> Page suivante.")
-                while int(choice) not in range(0, 10):
-                    choice = input("\n>>> Tappez le chiffre voulu. <<<\n")
-                if int(choice) in range(0, 9):
+                print("-" * 88)
+                while choice not in check_list:
+                    choice = input(">>> Tapez le chiffre correspondant"
+                                   " a la ligne a selectionner. <<<\n")
+                if choice != "9":
                     result = (int(choice) + (page * 8))
                     return result
                 else:
                     line = 0
                     page += 1
-            else:
-                print(line, ">>>", element)
-                line += 1
-        while int(choice) not in range(0, 9):
-            choice = input("\n>>> Tappez le chiffre correspondant. <<<\n")
+                    print("-" * 88)
+        print("-" * 88)
+        while choice not in check_list[0:8]:
+            choice = input(">>> Tapez le chiffre correspondant"
+                           " a la ligne a selectionner. <<<\n")
         result = (int(choice) + (page * 8))
         return result
 
     def print_substitution(self, product, sub_list):
         """Print choosing detail."""
-        print("Substitution possibles :")
-        item = self.print_el_in_list(sub_list)
-        print(">>>>>>---------------------------------<<<<<<")
+        choice = None
+        print("-" * 88)
+        print("Substitutions possibles ci dessous.")
+        item = self.print_pages(sub_list)
+        print(">" * 6, "-" * 80, "<" * 6)
         print("Vous avez choisi de remplacer", product, "par",
               sub_list[int(item)][0])
-        print(">>>>>>---------------------------------<<<<<<\n")
-        data = [product, sub_list[int(item)][0]]
-        SaveRequests.add_data(self.connection, data)
+        print(">" * 6, "-" * 80, "<" * 6)
+        while True:
+            print("Voulez vous sauvegarder ce resultat?")
+            print("0 >>> Oui")
+            print("1 >>> Non")
+            choice = input(">>> Tapez le chiffre correspondant"
+                           " a la ligne a selectionner. <<<\n")
+            if choice == "0":
+                data = [product, sub_list[int(item)][0]]
+                SaveRequests.add_data(self.connection, data)
+                print("Resultat sauvegarde.")
+                break
+            elif choice == "1":
+                break
 
     def select_product(self):
         """Selection product process."""
         categories_names = CategoriesRequests.get_data(self.connection, "name")
-        x = self.print_el_in_list(categories_names)
-        category = categories_names[int(x)]
+        number = self.print_pages(categories_names)
+        category = categories_names[number]
         aliments_in_category = AlimentsRequests.get_aliments_by_category(
                 self.connection, category)
-        x = self.print_el_in_list(aliments_in_category)
+        number = self.print_pages(aliments_in_category)
         substitut = AlimentsRequests.substitute_aliment(self.connection,
                                                         category)
-        self.print_substitution(aliments_in_category[int(x)], substitut)
+        self.print_substitution(aliments_in_category[number], substitut)
         self.menu()
 
     def show_saving(self):
         """Show substitute product in database."""
         data = SaveRequests.get_all(self.connection)
+        print("-" * 88)
+        print("-" * 40, "SAVING", "-" * 40)
+        print("-" * 88)
         for element in data:
             print(">>> Produit initial:", element[1])
             print(">>> Produit de substitution:",
-                  element[1:len(element)], "\n")
+                  element[1:len(element)])
+            print("-" * 80)
         self.menu()

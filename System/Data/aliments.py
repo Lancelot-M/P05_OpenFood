@@ -6,11 +6,11 @@ import requests
 class Aliments:
     """Class representative of aliments's data."""
 
-    def __init__(self, stores=None, nutrition_grades=None,
+    def __init__(self, stores=None, note=None,
                  product_name=None, id_off=None, categorie=None,
                  url=None):
         self.stores = stores
-        self.nutrition_grades = nutrition_grades
+        self.nutrition_grades = note
         self.product_name = product_name
         self.id_off = id_off
         self.categorie = categorie
@@ -28,18 +28,18 @@ class Aliments:
             clean_list = Aliments.filter_key(data)
             aliments_by_categorie[key] = clean_list
         for key, value in aliments_by_categorie.items():
-            for element_dict in value:
-                if "stores" in element_dict.keys():
-                    list_all.append(Aliments(url=element_dict["url"],
-                                    id_off=element_dict["id"], categorie=key,
-                                    stores=element_dict["stores"],
-                                    nutrition_grades=element_dict["nutrition_grades"],
-                                    product_name=element_dict["product_name"]))
+            for element in value:
+                if "stores" in element.keys():
+                    list_all.append(Aliments(url=element["url"],
+                                    id_off=element["id"], categorie=key,
+                                    stores=element["stores"],
+                                    note=element["nutrition_grades"],
+                                    product_name=element["product_name"]))
                 else:
-                    list_all.append(Aliments(url=element_dict["url"],
-                                    nutrition_grades=element_dict["nutrition_grades"],
-                                    product_name=element_dict["product_name"],
-                                    id_off=element_dict["id"], categorie=key))
+                    list_all.append(Aliments(url=element["url"],
+                                    note=element["nutrition_grades"],
+                                    product_name=element["product_name"],
+                                    id_off=element["id"], categorie=key))
         return list_all
 
     def filter_key(dict_of_categorie):

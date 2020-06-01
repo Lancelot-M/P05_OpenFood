@@ -1,7 +1,7 @@
 """File contain class Categories."""
 
 import requests
-from System.System.constantes import CATEGORIES
+from System.System.constants import CATEGORIES
 
 
 class Categories:
@@ -23,7 +23,9 @@ class Categories:
         data = reponse.json()
         for el in data["tags"]:
             if el["name"] in CATEGORIES:
-                data_table[el["name"]] = Categories(id_bdd=data_id, name=el["name"],
-                                                    url=el["url"], products=el["products"])
+                data_table[el["name"]] = Categories(id_bdd=data_id,
+                                                    name=el["name"],
+                                                    url=el["url"],
+                                                    products=el["products"])
                 data_id += 1
         return data_table

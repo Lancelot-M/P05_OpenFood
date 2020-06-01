@@ -1,7 +1,7 @@
 """File contain instruction for database."""
 
 from System.Requests.db_connection import Base_fn
-from System.System.constantes import MAX_PROD
+from System.System.constants import MAX_PROD
 
 
 class AlimentsRequests:
