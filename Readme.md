@@ -19,8 +19,8 @@ exemple : CATEGORIE = ["Cheeses"]
 	  CATEGORIE = ["Chocolates", "Condiments", "Chickens", "Hams", "Bolognese lasagne", "Potatoes", "Energy drinks", "Berries", "Snacks and desserts for babies", "Aromatic herbs", "Cheeses"]  
 	  
 Pour modifier le nombre de produits de substitution proposés, changer la valeur de MAX_PROD (avec une valeur minimal de 1).
-exemple : MAX_PROD = 1
-	  MAX_PROD = 9
+exemple : MAX_PROD = 1  
+	  MAX_PROD = 9  
 
 ## 4) Contrôles.
 Pour naviguer dans le terminal suivez les instructions.
