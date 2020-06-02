@@ -10,17 +10,19 @@ Pour lancer l'application:
 	- Créez et activez un environnement virtuel lié à ce projet.
 	- Téléchargez le dossier du projet grâce à la commande "git pull https://github.com/Lancelot-M/P05_OpenFood.git".
 	- Dans le dossier téléchargé, créez un fichier "config.py" (grâce à un éditeur de texte), contenant le nom de la base de donnée que vous avez créée, son hôte, votre identifiant mysql ainsi que votre mot de passe mysql en suivant le modèle contenu dans le fichier "config_exemple.py".  
-	- Lancer le programme en tappant "python3 main.py".    
+	- Lancer le programme en tapant "python3 main.py".    
 
 ## 3) Paramétrage.
 Dans le fichier "constants.py" ('./System/System/constants.py'), vous avez la possibilité de paramétrer le programme. En jouant sur les différentes catégories de produits ou le nombre de produits de substitution proposé lors du résultat de recherche.  
 Pour ajouter, modifier ou supprimer une catégorie, ajoutez, modifiez ou supprimez "le nom de la catégorie".  
-exemple : CATEGORIE = ["Cheeses"]  
-	  CATEGORIE = ["Chocolates", "Condiments", "Chickens", "Hams", "Bolognese lasagne", "Potatoes", "Energy drinks", "Berries", "Snacks and desserts for babies", "Aromatic herbs", "Cheeses"]  
+exemple :  
+          * CATEGORIE = ["Cheeses"]  
+	  * CATEGORIE = ["Chocolates", "Condiments", "Chickens", "Hams", "Bolognese lasagne", "Potatoes", "Energy drinks", "Berries", "Snacks and desserts for babies", "Aromatic herbs", "Cheeses"]  
 	  
 Pour modifier le nombre de produits de substitution proposés, changer la valeur de MAX_PROD (avec une valeur minimal de 1).
-exemple : MAX_PROD = 1  
-	  MAX_PROD = 9  
+exemple :  
+          * MAX_PROD = 1  
+	  * MAX_PROD = 9  
 
 ## 4) Contrôles.
 Pour naviguer dans le terminal suivez les instructions.
