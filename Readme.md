@@ -6,11 +6,11 @@ Python3.6, pip, MySQL, git ainsi qu'accéder à un terminal  est nécessaire pou
 
 ## 2) Installation.  
 Pour lancer l'application:  
-	- Ouvrez un terminal.  
-	- Créez et activez un environnement virtuel dédié à ce projet (consulter l'annexe si besoin).
-	- Téléchargez le dossier du projet ("git clone https://github.com/Lancelot-M/P05_OpenFood.git") et ouvez le.
-	- Créez un fichier "config.py" (grâce à un éditeur de texte), contenant le nom de la base de donnée que vous avez créée, son hôte, votre identifiant mysql ainsi que votre mot de passe mysql. En suivant le modèle contenu dans le fichier "config_exemple.py".  
-	- Installez les requirements ("pip install -r requirements.txt").
+	- Ouvrez un terminal.    
+	- Créez et activez un environnement virtuel dédié à ce projet (consulter l'annexe si besoin).  
+	- Téléchargez le dossier du projet ("git clone https://github.com/Lancelot-M/P05_OpenFood.git") et ouvez le.   
+	- Créez un fichier "config.py" (grâce à un éditeur de texte), contenant le nom de la base de donnée que vous avez créée, son hôte, votre identifiant mysql ainsi que votre mot de passe mysql. En suivant le modèle contenu dans le fichier "config_exemple.py".   
+	- Installez les requirements ("pip install -r requirements.txt").   
 	- Vous pouvez lancer le programme ("python3 main.py").    
 
 ## 3) Paramétrage.
